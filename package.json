@@ -1,0 +1,38 @@
+{
+  "name": "applicationname",
+  "author": "Idea42, LLC",
+  "license": "ISC",
+  "version": "1.0.0",
+  "description": "NodeJS Restful API, authenticating with JWT using Sequelize backend",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node server/index.js",
+    "babel-node": "babel-node",
+    "dev": "nodemon --verbose --exec npm run babel-node server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "body-parser": "^1.18.3",
+    "babel-polyfill": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "sequelize": "^4.38.0",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1",
+    "passport-anonymous": "^1.0.1",
+    "jsonwebtoken": "^8.3.0",
+    "http-status-codes": "^1.3.0",
+    "swagger-jsdoc": "^3.0.2",
+    "swagger-tools": "^0.10.4",
+    "swagger-ui": "^3.18.2",
+    "joi": "^13.6.0",
+    "sqlite3": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
