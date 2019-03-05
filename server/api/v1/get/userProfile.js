@@ -4,14 +4,6 @@ import { getUserById } from '../../../data/queries/userQueries';
 
 /**
  * @swagger
- * definitions:
- *   userProfileResults:
- *     properties:
- *       userName:
- *         type: string
- *       id:
- *         type: string
- * 
  * /api/v1/user/profile:
  *   get:
  *     tags:
@@ -24,8 +16,6 @@ import { getUserById } from '../../../data/queries/userQueries';
  *     responses:
  *       200:
  *         description: User profile information
- *         schema:
- *          $ref: '#/definitions/heartbeatResults'
  */
 const extract = request => {
 

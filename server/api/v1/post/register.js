@@ -9,14 +9,6 @@ import { createToken } from '../../../utils/authUtils';
 
 /**
  * @swagger
- * definitions:
- *   loginResults:
- *     properties:
- *       userName:
- *         type: string
- *       id: 
- *         type: string
- * 
  * /api/v1/register:
  *   post:
  *     tags:
@@ -38,8 +30,6 @@ import { createToken } from '../../../utils/authUtils';
  *     responses:
  *       200:
  *         description: Basic user information
- *         schema:
- *          $ref: '#/definitions/loginResults'
  */
 const extract = request => {
     let validationResults = Joi.validate(request.body, bodySchema);

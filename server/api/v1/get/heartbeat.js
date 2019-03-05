@@ -3,14 +3,6 @@ import regularHandler from '../../../utils/requestHandler';
 
 /**
  * @swagger
- * definitions:
- *   heartbeatResults:
- *     properties:
- *       status:
- *         type: string
- *       serverTime:
- *         type: string
- * 
  * /api/v1/heartbeat:
  *   get:
  *     tags:
@@ -20,9 +12,7 @@ import regularHandler from '../../../utils/requestHandler';
  *       - application/json
  *     responses:
  *       200:
- *         description: An array of puppies
- *         schema:
- *          $ref: '#/definitions/heartbeatResults'
+ *         description: A heartbeat response
  */
 const extract = request => {
     return {};
