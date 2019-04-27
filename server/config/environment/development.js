@@ -1,14 +1,5 @@
 const environmentConfig = {
     environmentName: 'local',
-    sequelizeConfig: {
-        database: 'applicationname',
-        userName: 'sa',
-        password: 'sa',
-        settings: {
-            dialect: 'sqlite',
-            storage: 'applicationname.sqlite'
-        }
-    },
     jwt: {
         auidence: 'applicationname',
         issuers: {
