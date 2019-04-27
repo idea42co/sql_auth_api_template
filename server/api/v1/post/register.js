@@ -55,7 +55,7 @@ const bodySchema = {
 const execute = async (request, params) => {
     let { userName, password } = params;
 
-    await addUser({ userName, passwordHash: password });
+    await addUser({ userName, passwordHash: password, createdAt: new Date() });
 
     var user = await getUser(userName, password);
 
