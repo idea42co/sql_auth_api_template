@@ -9,7 +9,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node server/index.js",
     "babel-node": "babel-node",
-    "dev": "nodemon --verbose --exec npm run babel-node server/index.js"
+    "dev": "nodemon --verbose --exec npm run babel-node server/index.js",
+    "model:generate": "sequelize model:generate --config server/data/config.json.json --migrations-path server/data/migrations --seeders-path server/data/seeders --models-path server/data/models",
+    "migration:generate": "sequelize migration:generate --config server/data/config.json --migrations-path server/data/migrations --seeders-path server/data/seeders --models-path server/data/models",
+    "seed:generate": "sequelize seed:generate --config server/data/config.json --migrations-path server/data/migrations --seeders-path server/data/seeders --models-path server/data/models",
+    "db:migrate": "sequelize db:migrate --config server/data/config.json --migrations-path server/data/migrations --seeders-path server/data/seeders --models-path server/data/models",
+    "db:migrate:undo": "sequelize db:migrate:undo --config server/data/config.json --migrations-path server/data/migrations --seeders-path server/data/seeders --models-path server/data/models",
+    "db:create": "sequelize db:create --config server/data/config.json --migrations-path server/data/migrations --seeders-path server/data/seeders --models-path server/data/models",
+    "db:seed:all": "sequelize db:seed:all --config server/data/config.json --migrations-path server/data/migrations --seeders-path server/data/seeders --models-path server/data/models",
+    "db:seed:undo:all": "sequelize db:seed:undo:all --config server/data/config.json --migrations-path server/data/migrations --seeders-path server/data/seeders --models-path server/data/models"
   },
   "dependencies": {
     "express": "^4.16.3",
@@ -18,7 +26,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
-    "sequelize": "^4.38.0",
+    "sequelize": "^5.7.6",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "passport-anonymous": "^1.0.1",

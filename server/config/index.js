@@ -1,15 +1,9 @@
 const prepareConfiguation = () => {
-    const configFilePath = './environment/' + (process.env.NODE_ENV || 'local')
+    const configFilePath = './environment/' + (process.env.NODE_ENV || 'development')
     const { environmentConfig } = require(configFilePath);
 
     return {
         environmentName: environmentConfig.environmentName,
-        sequelizeConfig: {
-            database: environmentConfig.sequelizeConfig.database,
-            userName: environmentConfig.sequelizeConfig.userName,
-            password: environmentConfig.sequelizeConfig.password,
-            settings: environmentConfig.sequelizeConfig.settings
-        },
         jwt: {
             auidence: environmentConfig.jwt.auidence,
             issuers: {

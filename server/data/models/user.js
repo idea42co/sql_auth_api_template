@@ -1,15 +1,12 @@
-import Sequelize from 'sequelize';
-
-const model = (sequelize) => {
-    var model = sequelize.define('Users', {
-        id: { type: Sequelize.UUID, defaultValue: Sequelize.UUIDV1, primaryKey: true },
-        userName: Sequelize.STRING,
-        passwordHash: Sequelize.STRING
-    });
-
-    model.sync();
-
-    return model;
-}
-
-export default model;
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  const user = sequelize.define('user', {
+    id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV1, primaryKey: true },
+    userName: DataTypes.STRING,
+    passwordHash: DataTypes.STRING
+  }, {});
+  user.associate = function (models) {
+    // associations can be defined here
+  };
+  return user;
+};
