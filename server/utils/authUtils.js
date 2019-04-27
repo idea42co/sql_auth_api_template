@@ -1,7 +1,9 @@
 import passport from 'passport';
+import moment from 'moment';
 import { Strategy as BearerStrategy } from 'passport-http-bearer';
 import { Strategy as AnonymousStrategy } from 'passport-anonymous';
 import jwt from 'jsonwebtoken';
+import { token as Token } from '../data/models';
 
 import config from '../config'
 import authTypes from '../constants/authTypes'
@@ -36,13 +38,61 @@ const preparePassport = (() => {
     passport.use(authTypes.ANONYMOUS, new AnonymousStrategy());
 })();
 
-const createToken = (payload) => {
+const createToken = async (userId, payload) => {
     const jwtToken = jwt.sign(payload, config.jwt.issuers.server.publicKey, {
         audience: config.environmentName,
-        issuer: 'server'
+        issuer: 'server',
+        expiresIn: config.jwt.expiresInSeconds
     });
 
-    return Buffer.from(jwtToken).toString('base64');
+    let token = Buffer.from(jwtToken).toString('base64');
+
+    // Do we need to do anything with tokens in the DB? 
+
+    let issueDate = new moment();
+    let expirationDate = new moment().add(config.jwt.expiresInSeconds, "seconds");
+
+    switch (config.jwt.management.toLowerCase()) {
+        case "oneperuser":
+            await Token.destroy({
+                where: {
+                    userId
+                }
+            });
+            await Token.create({
+                userId,
+                token,
+                issuedOn: issueDate,
+                expiresOn: expirationDate
+            })
+            break;
+        case "multipleperuser":
+            let issuedTokens = await Token.findAll({
+                where: {
+                    userId
+                }
+            });
+
+            if (config.jwt.maxPerUser > 1 && issuedTokens.length >= config.jwt.maxPerUser) {
+                await Token.destroy({
+                    where: {
+                        userId
+                    },
+                    orderBy: [['issuedOn', 'ASC']],
+                    limit: (issuedTokens.length + 1) - config.jwt.maxPerUser
+                })
+            }
+
+            await Token.create({
+                userId,
+                token,
+                issuedOn: issueDate,
+                expiresOn: expirationDate
+            })
+            break;
+    }
+
+    return token;
 }
 
 export { passport as authUtils, createToken }

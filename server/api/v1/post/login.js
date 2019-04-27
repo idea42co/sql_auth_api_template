@@ -61,7 +61,7 @@ const execute = async (request, params) => {
         throw new Error('Invalid user information');
     }
 
-    var bearerToken = createToken({ userId: user.id, userName: user.userName });
+    var bearerToken = await createToken(user.id, { userId: user.id, userName: user.userName });
 
     return prepareResults(bearerToken, userName);
 }

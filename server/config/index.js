@@ -13,7 +13,10 @@ const prepareConfiguation = () => {
                 server: {
                     publicKey: environmentConfig.jwt.issuers.server.publicKey
                 }
-            }
+            },
+            expiresInSeconds: environmentConfig.jwt.expiresInSeconds || 60 * 60 * 24, // Token will expire in 1 day by default (60 * 60 * 24)
+            management: environmentConfig.jwt.management,
+            maxPerUser: environmentConfig.jwt.maxPerUser
         }
     }
 }
