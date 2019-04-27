@@ -9,7 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node server/index.js",
     "babel-node": "babel-node",
-    "dev": "nodemon --verbose --exec npm run babel-node server/index.js"
+    "dev": "nodemon --verbose --exec npm run babel-node server/index.js",
+    "model:generate": "sequelize model:generate --config server/data/config --migrations-path server/data/migrations --seeders-path server/data/seeders --models-path server/data/models"
   },
   "dependencies": {
     "express": "^4.16.3",
