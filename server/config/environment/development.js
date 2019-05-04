@@ -31,8 +31,8 @@ const environmentConfig = {
             }
         },
         expiresInSeconds: 60 * 60 * 3, //
-        management: 'none',
-        maxPerUser: -1
+        management: 'multiplePerUser',
+        maxPerUser: 10
     }
 }
 
