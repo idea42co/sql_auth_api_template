@@ -47,7 +47,7 @@ const preparePassport = (() => {
     passport.use(authTypes.ANONYMOUS, new AnonymousStrategy());
 })();
 
-const createToken = async (userId, payload) => {
+const createToken = async (userId, payload, userAgent, ipAddress) => {
     const jwtToken = jwt.sign(payload, config.jwt.issuers.server.publicKey, {
         audience: config.environmentName,
         issuer: 'server',
@@ -60,14 +60,14 @@ const createToken = async (userId, payload) => {
     switch (config.jwt.management.toLowerCase()) {
         case "oneperuser":
             await deleteUserTokens(userId);
-            await addUserToken(userId, token);
+            await addUserToken(userId, token, userAgent, ipAddress);
             break;
         case "multipleperuser":
             let issuedTokens = await getUserTokens(userId);
             if (config.jwt.maxPerUser > 1 && issuedTokens.length >= config.jwt.maxPerUser) {
                 await deleteOldUserTokens(userId, (issuedTokens.length + 1) - config.jwt.maxPerUser)
             }
-            await addUserToken(userId, token);
+            await addUserToken(userId, token, userAgent, ipAddress);
             break;
     }
 

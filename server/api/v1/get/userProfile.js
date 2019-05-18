@@ -18,7 +18,6 @@ import { getUserById } from '../../../data/queries/userQueries';
  *         description: User profile information
  */
 const extract = request => {
-
     const { userId } = request.user;
     console.log(request.user)
     return { userId };
@@ -26,8 +25,6 @@ const extract = request => {
 
 const execute = async (request, params) => {
     const { userId } = params
-
-
 
     var results = await getUserById(userId);
     return prepareResponse(results.userName, results.id)

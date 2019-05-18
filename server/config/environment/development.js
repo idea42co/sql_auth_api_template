@@ -32,7 +32,7 @@ const environmentConfig = {
         },
         expiresInSeconds: 60 * 60 * 3, //
         management: 'multiplePerUser',
-        maxPerUser: 10
+        maxPerUser: 5
     }
 }
 

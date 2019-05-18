@@ -43,13 +43,15 @@ const deleteOldUserTokens = async (userId, limit) => {
     });
 }
 
-const addUserToken = async (userId, token) => {
+const addUserToken = async (userId, token, userAgent, ipAddress) => {
     let issueDate = new moment();
     let expirationDate = new moment().add(config.jwt.expiresInSeconds, "seconds");
 
     await Token.create({
         userId,
         token,
+        userAgent,
+        ipAddress,
         issuedOn: issueDate,
         expiresOn: expirationDate
     })

@@ -19,6 +19,12 @@ module.exports = {
       token: {
         type: Sequelize.STRING
       },
+      userAgent: {
+        type: Sequelize.STRING
+      },
+      ipAddress: {
+        type: Sequelize.STRING
+      },
       issuedOn: {
         type: Sequelize.DATE
       },
