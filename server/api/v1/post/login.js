@@ -33,6 +33,8 @@ import { createToken } from '../../../utils/authUtils';
  */
 const extract = request => {
     let validationResults = Joi.validate(request.body, bodySchema);
+    let userAgent = request.headers['user-agent'];
+    let ipAddress = request.connection.remoteAddress;
 
     if (validationResults.error) {
         throw new Error(validationResults.error);
@@ -44,7 +46,7 @@ const extract = request => {
     hash.update(password);
     password = hash.digest('hex')
 
-    return { userName, password };
+    return { userName, password, userAgent, ipAddress };
 }
 
 const bodySchema = {
@@ -53,7 +55,7 @@ const bodySchema = {
 }
 
 const execute = async (request, params) => {
-    let { userName, password } = params;
+    let { userName, password, userAgent, ipAddress } = params;
 
     var user = await getUser(userName, password);
 
@@ -61,7 +63,7 @@ const execute = async (request, params) => {
         throw new Error('Invalid user information');
     }
 
-    var bearerToken = createToken({ userId: user.id, userName: user.userName });
+    var bearerToken = await createToken(user.id, { userId: user.id, userName: user.userName }, userAgent, ipAddress);
 
     return prepareResults(bearerToken, userName);
 }
